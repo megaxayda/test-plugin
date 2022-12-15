@@ -1,7 +1,7 @@
 import './App.css';
 
 import { Device } from '@capacitor/device';
-import { DatecsPrinter } from 'datecs-printer-capacitor';
+import { DatecsPrinter as printer } from 'datecs-printer-capacitor';
 import get from 'lodash.get';
 import { useEffect, useState } from 'react';
 
@@ -20,16 +20,16 @@ function App() {
       }
 
       handleLog('platform: android!');
-      const res = await DatecsPrinter.getBluetoothPairedDevices();
+      const res = await printer.getBluetoothPairedDevices();
       handleLog(`Paired Devices: ${JSON.stringify(res)}`);
       setListAddress(res.data);
 
-      const res2 = await DatecsPrinter.getConnectionStatus();
+      const res2 = await printer.getConnectionStatus();
       handleLog(`BL status: ${JSON.stringify(res2)}`);
 
-      DatecsPrinter.addListener('bluetoothChange', async (res) => {
+      printer.addListener('bluetoothChange', async (res) => {
         handleLog(`BL status (live): ${JSON.stringify(res)}`);
-        const devices = await DatecsPrinter.getBluetoothPairedDevices();
+        const devices = await printer.getBluetoothPairedDevices();
         handleLog(`Paired Devices (live): ${JSON.stringify(devices)}`);
         setListAddress(devices.data);
       });
@@ -38,7 +38,7 @@ function App() {
     init();
 
     return () => {
-      DatecsPrinter.removeAllListeners();
+      printer.removeAllListeners();
     };
   }, []);
 
@@ -68,12 +68,12 @@ function App() {
                 setLoading(true);
                 const address = get(e, 'address');
                 if (address) {
-                  const connectRes = await DatecsPrinter.connect({
+                  const connectRes = await printer.connect({
                     address,
                   });
                   handleLog(JSON.stringify(connectRes));
 
-                  const res = await DatecsPrinter.print({
+                  const res = await printer.print({
                     content: `Pin code: ${Math.floor(Math.random() * 100000000)
                       .toString()
                       .substring(0, 6)}{br}{br}{br}{br}{br}`,
