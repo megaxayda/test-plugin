@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">vite-reactts-eslint-prettier</string>
+    <string name="title_activity_main">vite-reactts-eslint-prettier</string>
+    <string name="package_name">com.tai.testplugin</string>
+    <string name="custom_url_scheme">com.tai.testplugin</string>
+</resources>
