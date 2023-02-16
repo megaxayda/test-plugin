@@ -14,7 +14,7 @@
     "@capacitor/android": "^4.6.1",
     "@capacitor/core": "^4.6.1",
     "@capacitor/device": "^4.1.0",
-    "datecs-printer-capacitor": "../datecs-printer-capacitor",
+    "datecs-printer-capacitor": "../datecs-printer-capacitor/",
     "lodash.get": "^4.4.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"

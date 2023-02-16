@@ -1,17 +1,20 @@
 import './App.css';
 
 import { Device } from '@capacitor/device';
-import { DatecsPrinter } from 'datecs-printer-capacitor';
+import { DatecsPrinter, Device as BLDevice } from 'datecs-printer-capacitor';
 import get from 'lodash.get';
 import { useEffect, useState } from 'react';
 
 function App() {
   const [log, setLog] = useState<string[]>([]);
   const [listAddress, setListAddress] = useState([]);
+  const [listSearchAddress, setListSearchAddress] = useState<BLDevice[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const init = async () => {
+      DatecsPrinter.scanBluetoothDevice();
+
       const info = await Device.getInfo();
 
       if (info.platform !== 'android') {
@@ -32,6 +35,13 @@ function App() {
         const devices = await DatecsPrinter.getBluetoothPairedDevices();
         handleLog(`Paired Devices (live): ${JSON.stringify(devices)}`);
         setListAddress(devices.data);
+      });
+
+      DatecsPrinter.addListener('bluetoothSearchChange', async (res) => {
+        handleLog(`Search Devices (live): ${JSON.stringify(res)}`);
+        if (res.name) {
+          setListSearchAddress([...listSearchAddress, res]);
+        }
       });
     };
 
@@ -58,6 +68,10 @@ function App() {
         >
           Clear log
         </button>
+        {listSearchAddress &&
+          listSearchAddress.map((e) => {
+            return <p key={e.name}>{e.name}</p>;
+          })}
         {listAddress &&
           listAddress.map((e, index) => (
             <button

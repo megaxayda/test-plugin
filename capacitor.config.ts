@@ -5,10 +5,10 @@ const config: CapacitorConfig = {
   appName: 'vite-reactts-eslint-prettier',
   webDir: 'dist',
   bundledWebRuntime: false,
-  server: {
-    url: 'http://192.168.28.145:3000/',
-    cleartext: true,
-  },
+  // server: {
+  //   url: 'http://192.168.28.145:3000/',
+  //   cleartext: true,
+  // },
 };
 
 export default config;

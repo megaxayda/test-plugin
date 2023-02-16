@@ -15,7 +15,7 @@
 }
 
 p {
-  margin: 20px 0px;
+  margin: 0px 0px;
 }
 
 .header {
@@ -25,16 +25,6 @@ p {
 .body {
   margin: 20px 0 10px;
   font-size: 0.9rem;
-}
-
-button {
-  outline: none;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 35px;
-
-  background: #845ec2;
-  color: white;
 }
 
 @media (prefers-reduced-motion: no-preference) {
